@@ -45,7 +45,10 @@ func Set(key string, value interface{}, time int) error {
 	}
 
 	_, err = conn.Do("SET", key, v)
-	_, err = conn.Do("EXPIRE", key, time)
+	if time != 0{
+		_, err = conn.Do("EXPIRE", key, time)
+	}
+
 	if err != nil {
 		return err
 	}
@@ -82,4 +85,49 @@ func Exists(key string) bool {
 		return false
 	}
 	return exists
+}
+
+// incr a key
+func Incr(key string) error{
+	conn := RedisConn.Get()
+	defer conn.Close()
+	_, err := conn.Do("INCR", key)
+	if err != nil{
+		return err
+	}
+	return nil
+
+}
+
+
+// incr key by num
+func IncrBy(key string, num int) error{
+	conn := RedisConn.Get()
+	defer conn.Close()
+	_, err := conn.Do("INCRBY", key, num)
+	if err != nil{
+		return err
+	}
+	return nil
+}
+
+// decr a key
+func Decr(key string)error{
+	conn := RedisConn.Get()
+	defer conn.Close()
+	_, err := conn.Do("DECR", key)
+	if err != nil{
+		return err
+	}
+	return nil
+}
+
+func DecrBy(key string)error{
+	conn := RedisConn.Get()
+	defer conn.Close()
+	_, err := conn.Do("DECRBY", key)
+	if err != nil{
+		return err
+	}
+	return nil
 }

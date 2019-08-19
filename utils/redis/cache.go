@@ -1,0 +1,9 @@
+package redis
+
+const (
+	CACHE_USER= "USER"
+	CACHE_USER_EXPIRE = 300
+
+	CACHE_USERS = "USERS"
+	CACHE_USERS_EXPIRE = 300
+)

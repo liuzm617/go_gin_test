@@ -21,6 +21,7 @@ import (
 // @param auth body models.Auth true "auth"
 // @Success 200 {object} app.Response
 // @Failure 400 {object} app.Response
+// @Failure 401 {object} app.Response
 // @Failure 404 {object} app.Response
 // @Failure 500 {object} app.Response
 // @Router /auth [post]
